@@ -7,7 +7,7 @@ class Logo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 20),
+      margin: EdgeInsets.symmetric(vertical: 5.0),
       alignment: Alignment.center,
       child: RichText(
         textAlign: TextAlign.center,
