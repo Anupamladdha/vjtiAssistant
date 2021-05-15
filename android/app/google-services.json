@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "823861693746",
+    "project_id": "vjtiedu-2f094",
+    "storage_bucket": "vjtiedu-2f094.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:823861693746:android:0d64451e97745897859b2b",
+        "android_client_info": {
+          "package_name": "com.example.vjtiAssistant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "823861693746-rj8ahvaoho0r3ctv5du5ams89gsr40q9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbvyYZ_Dex3Fsdir-ch6BH_-HSPyj9wGM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "823861693746-rj8ahvaoho0r3ctv5du5ams89gsr40q9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
