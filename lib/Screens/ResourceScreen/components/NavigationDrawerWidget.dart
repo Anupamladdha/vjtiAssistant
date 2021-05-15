@@ -63,7 +63,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                   height: 10,
                 ),
                 BuildMenuItem(
-                  text: "Discussion",
+                  text: "Discussions",
                   icon: Icons.people,
                 ),
                 SizedBox(
@@ -77,7 +77,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                   height: 10,
                 ),
                 BuildMenuItem(
-                  text: "Logout",
+                  text: "Sign Out",
                   icon: Icons.people,
                 ),
               ],
@@ -94,15 +94,15 @@ class NavigationDrawerWidget extends StatelessWidget {
                   height: 15,
                 ),
                 BuildMenuItem(
-                  text: "People",
-                  icon: Icons.people,
+                  text: "Share this app",
+                  icon: Icons.share,
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 BuildMenuItem(
-                  text: "People",
-                  icon: Icons.people,
+                  text: "Help and Feedback",
+                  icon: Icons.help_outline,
                 ),
               ],
             ),
@@ -128,12 +128,9 @@ class BuildMenuItem extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(10)),
-        // color: Color(0xFF59D2FE).withOpacity(0.3),
       ),
       child: ListTile(
         tileColor: Color(0xFF59D2FE).withOpacity(0.2),
-        // tileColor: PrimaryColor,
-
         leading: Icon(
           icon,
           color: Color(0xFFDFD9E2),
