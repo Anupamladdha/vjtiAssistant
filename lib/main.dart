@@ -1,11 +1,11 @@
 // Packages
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 // Screens
 import 'Screens/OnBoarding/OnBoardingScreen.dart';
 import 'Screens/Login/login.dart';
 import 'Screens/Signup/signup.dart';
+import 'package:vjtiAssistant/Screens/ResourceScreen/ResourceScreen.dart';
 
 
 void main() {
@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => OnBoardingScreen(),
         '/login': (context) => LoginScreen(),
         '/signup': (context) => SignUpScreen(),
+        '/resources/': (context) => ResourceScreen(),
       },
     );
   }
