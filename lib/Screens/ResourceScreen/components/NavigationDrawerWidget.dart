@@ -17,38 +17,47 @@ class NavigationDrawerWidget extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(top: 20),
                   child: Container(
+                    alignment: Alignment.centerLeft,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
+                        SizedBox(height: 10,),
                         Container(
-                          width: 100,
-                          height: 100,
+                          width: 75,
+                          height: 75,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                  "https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg",),
+                              fit: BoxFit.cover,
+                            ),
                           ),
+                        ),
+                        SizedBox(
+                          height: 15,
                         ),
                         Text(
                           "Ankit Jaiswal",
                           style: GoogleFonts.roboto(
-                            fontSize: 30,
-                            color: BlackColor,
+                            fontSize: 25,
+                            color: Color(0xFF707070),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
                           "abjaiswal_b19@ce.vjti.ac.in",
                           style: GoogleFonts.roboto(
-                            fontSize: 20,
-                            color: BlackColor,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                            color: Color(0xFF707070),
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ],
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 50,
-                ),
+                SizedBox(height: 10),
                 Divider(
                   color: BlackColor,
                 ),
@@ -72,6 +81,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                 BuildMenuItem(
                   text: "Quiz",
                   icon: Icons.people,
+                  active: true,
                 ),
                 SizedBox(
                   height: 10,
@@ -91,7 +101,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                   color: BlackColor,
                 ),
                 const SizedBox(
-                  height: 15,
+                  height: 7,
                 ),
                 BuildMenuItem(
                   text: "Share this app",
@@ -103,6 +113,9 @@ class NavigationDrawerWidget extends StatelessWidget {
                 BuildMenuItem(
                   text: "Help and Feedback",
                   icon: Icons.help_outline,
+                ),
+                SizedBox(
+                  height: 10,
                 ),
               ],
             ),
@@ -118,34 +131,88 @@ class BuildMenuItem extends StatelessWidget {
     Key key,
     @required this.text,
     @required this.icon,
+    this.active = false,
   }) : super(key: key);
 
   final String text;
   final IconData icon;
+  final bool active;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-      ),
-      child: ListTile(
-        tileColor: Color(0xFF59D2FE).withOpacity(0.2),
-        leading: Icon(
-          icon,
-          color: Color(0xFFDFD9E2),
-        ),
-        title: Text(
-          text,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            // color: Colors.white,
+    return ClipRRect(
+      borderRadius: BorderRadius.all(Radius.circular(10)),
+      child: FlatButton(
+        padding: EdgeInsets.all(0),
+        onPressed: () {},
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            color: this.active
+                ? Color(0xFF0070FF).withOpacity(.28)
+                : Color(0xFFFFFFFF).withOpacity(0),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+            child: Row(
+              children: <Widget>[
+                Icon(
+                  icon,
+                  color: this.active ? Color(0xFF0070FF) : Color(0xFF707070),
+                ),
+                SizedBox(
+                  width: 17,
+                ),
+                Text(
+                  text,
+                  style: GoogleFonts.roboto(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: this.active ? Color(0xFF0070FF) : Color(0xFF707070),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
-        onTap: () {},
-        hoverColor: PrimaryColor,
       ),
     );
   }
 }
+
+// class BuildMenuItem extends StatelessWidget {
+//   const BuildMenuItem({
+//     Key key,
+//     @required this.text,
+//     @required this.icon,
+//   }) : super(key: key);
+
+//   final String text;
+//   final IconData icon;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       decoration: BoxDecoration(
+//         borderRadius: BorderRadius.all(Radius.circular(10)),
+//       ),
+//       child: ListTile(
+//         tileColor: Color(0xFF59D2FE).withOpacity(0.2),
+//         leading: Icon(
+//           icon,
+//           color: Color(0xFFDFD9E2),
+//         ),
+//         title: Text(
+//           text,
+//           style: TextStyle(
+//             fontSize: 16,
+//             fontWeight: FontWeight.w600,
+//             // color: Colors.white,
+//           ),
+//         ),
+//         onTap: () {},
+//         hoverColor: PrimaryColor,
+//       ),
+//     );
+//   }
+// }
