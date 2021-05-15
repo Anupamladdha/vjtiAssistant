@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key key}) : super(key: key);
-
+  TextEditingController _email = new TextEditingController();
+  TextEditingController _pass = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Color(0xffF7F7F7),
         body: SafeArea(
@@ -44,6 +46,7 @@ class LoginScreen extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.only(bottom: 20.0),
                         child: TextFormField(
+                          controller: _email,
                           decoration: InputDecoration(
                             prefixIcon: Icon(Icons.email),
                             labelText: 'Email',
@@ -60,6 +63,7 @@ class LoginScreen extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.only(bottom: 30.0),
                         child: TextFormField(
+                          controller: _pass,
                           obscureText: true,
                           decoration: InputDecoration(
                             prefixIcon: Icon(Icons.lock),
@@ -87,7 +91,11 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                           child: Text('Sign In'),
-                          onPressed: () => print('hi'),
+                          onPressed: () => {
+                            if(_email.text == '' || _pass.text == ''){
+                              print("Please enter valid email and password.")
+                            }
+                          },
                         ),
                       ),
                       Container(
@@ -102,7 +110,9 @@ class LoginScreen extends StatelessWidget {
                                 borderRadius: new BorderRadius.circular(50.0)),
                           ),
                           child: Text('Sign in with google'),
-                          onPressed: () => print('hi'),
+                          onPressed: () => {
+                            
+                          },
                         ),
                       ),
                       Container(
