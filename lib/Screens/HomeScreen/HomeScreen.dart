@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("Welcome!, ${user.email}")
+      child: Text("Welcome!")
     );
   }
 }

@@ -33,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
     try {
-      FirebaseUser user = (await _auth.signInWithEmailAndPassword(email: email, password: password)) as FirebaseUser;
+      FirebaseUser user = (await _auth.signInWithEmailAndPassword(email: email, password: password)).user;
       Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
     } catch (e) {
       print(e);
