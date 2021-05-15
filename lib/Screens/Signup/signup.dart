@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Signup extends StatelessWidget {
-  const Signup({Key key}) : super(key: key);
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,10 +10,8 @@ class Signup extends StatelessWidget {
         backgroundColor: Color(0xffF7F7F7),
         body: SafeArea(
           child: Container(
-            // margin: EdgeInsets.fromLTRB(30, 30, 30, 30),
             padding: EdgeInsets.all(30),
             child: ListView(
-              // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   margin: EdgeInsets.only(bottom: 5.0),

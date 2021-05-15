@@ -1,10 +1,15 @@
+// Packages
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+// Screens
 import 'Screens/OnBoarding/OnBoardingScreen.dart';
 import 'Screens/Login/login.dart';
 import 'Screens/Signup/signup.dart';
 
+
 void main() {
-  runApp(Signup());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -19,7 +24,11 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.white,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: OnBoardingScreen(),
+      routes: {
+        '/': (context) => OnBoardingScreen(),
+        '/login': (context) => LoginScreen(),
+        '/signup': (context) => SignUpScreen(),
+      },
     );
   }
 }
