@@ -13,9 +13,10 @@ class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController _email = TextEditingController();
   TextEditingController _pass = TextEditingController();
+  bool _isLoading = false;
 
-  String email;
-  String password;
+  // String email;
+  // String password;
 
   chechAuth() async{
     _auth.onAuthStateChanged.listen((user){
@@ -24,6 +25,25 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
       }
     });
+  }
+
+  login(String email, String password) async {
+    if(password.length <= 6){
+      print("Password is too small");
+      return;
+    }
+    try {
+      FirebaseUser user = (await _auth.signInWithEmailAndPassword(email: email, password: password)) as FirebaseUser;
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    this.chechAuth();
   }
 
   Widget build(BuildContext context) {
@@ -115,6 +135,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: () => {
                             if(_email.text == '' || _pass.text == ''){
                               print("Please enter valid email and password.")
+                            }else{
+                              login(_email.text, _pass.text)
                             }
                           },
                         ),
