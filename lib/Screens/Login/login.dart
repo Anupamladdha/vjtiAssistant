@@ -7,6 +7,7 @@ class LoginScreen extends StatefulWidget {
   _LoginScreenState createState() => _LoginScreenState();
 }
 
+//TODO: Add logic for accepting college email only.
 class _LoginScreenState extends State<LoginScreen> {
   @override
   final FirebaseAuth _auth = FirebaseAuth.instance;
