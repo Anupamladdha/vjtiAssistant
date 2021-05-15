@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'Screens/OnBoarding/OnBoardingScreen.dart';
+import 'Screens/Login/login.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(Login());
 }
 
 class MyApp extends StatelessWidget {
