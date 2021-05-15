@@ -38,15 +38,22 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     this.getUser();
     this.checkUser();
-    
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Container(
-          child: Text("Welcome, ${user.email}")
+        child: SafeArea(
+            child: Container(
+            child: Column(
+              children: [
+                Text("Home Screen"),
+                this.user != null? Text("${user.email}"): Text("")
+              ],
+            )
+
+          ),
         ),
       )
     );
