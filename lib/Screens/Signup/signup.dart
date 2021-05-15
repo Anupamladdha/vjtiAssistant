@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Login extends StatelessWidget {
-  const Login({Key key}) : super(key: key);
+class Signup extends StatelessWidget {
+  const Signup({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +10,7 @@ class Login extends StatelessWidget {
         backgroundColor: Color(0xffF7F7F7),
         body: SafeArea(
           child: Container(
-            // margin: EdgeInsets.fromLTRB(30, 70, 30, 60),
+            // margin: EdgeInsets.fromLTRB(30, 30, 30, 30),
             padding: EdgeInsets.all(30),
             child: ListView(
               // crossAxisAlignment: CrossAxisAlignment.start,
@@ -18,7 +18,7 @@ class Login extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(bottom: 5.0),
                   child: Text(
-                    'SIGN IN',
+                    'SIGN UP',
                     style: TextStyle(
                       fontSize: 40.0,
                       color: Color(0xff4446F2),
@@ -30,7 +30,7 @@ class Login extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(bottom: 50.0),
                   child: Text(
-                    'Welcome Back!',
+                    'Create your account',
                     style: TextStyle(
                       fontSize: 35.0,
                       color: Color(0xff676767),
@@ -41,6 +41,22 @@ class Login extends StatelessWidget {
                 Form(
                   child: Column(
                     children: [
+                      Container(
+                        margin: EdgeInsets.only(bottom: 20.0),
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.people),
+                            labelText: 'Username',
+                            filled: true,
+                            fillColor: Colors.white,
+                            contentPadding: EdgeInsets.all(20.0),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
                       Container(
                         margin: EdgeInsets.only(bottom: 20.0),
                         child: TextFormField(
@@ -64,6 +80,23 @@ class Login extends StatelessWidget {
                           decoration: InputDecoration(
                             prefixIcon: Icon(Icons.lock),
                             labelText: 'Password',
+                            filled: true,
+                            fillColor: Colors.white,
+                            contentPadding: EdgeInsets.all(20.0),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(bottom: 30.0),
+                        child: TextFormField(
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.lock),
+                            labelText: 'Confirm Password',
                             filled: true,
                             fillColor: Colors.white,
                             contentPadding: EdgeInsets.all(20.0),
