@@ -36,16 +36,18 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    getUser();
-    checkUser();
+    this.getUser();
+    this.checkUser();
     
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Text("Welcome, ${user.email}")
+      body: Center(
+        child: Container(
+          child: Text("Welcome, ${user.email}")
+        ),
       )
     );
   }

@@ -18,7 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   // String email;
   // String password;
 
-  chechAuth() async{
+  checkAuth() async{
     _auth.onAuthStateChanged.listen((user){
       if(user != null){
         print("User is logged in!");
@@ -43,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    this.chechAuth();
+    this.checkAuth();
   }
 
   Widget build(BuildContext context) {
