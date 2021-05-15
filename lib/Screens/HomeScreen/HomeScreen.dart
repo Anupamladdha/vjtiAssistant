@@ -8,6 +8,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool isLoggenIn = false;
+  FirebaseUser user;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   checkUser() async {
 
@@ -19,15 +21,22 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   getUser() async {
-    FirebaseUser user = await _auth.currentUser();
-    await user?.reload();
-    user = await _auth.currentUser();
+    FirebaseUser fuser = await _auth.currentUser();
+    await fuser?.reload();
+    fuser = await _auth.currentUser();
+    if(fuser != null){
+      setState(() {
+        this.user = fuser;
+        this.isLoggenIn = true;
+      });
+    }
+
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("This is home screen!"),
+      child: Text("Welcome!, ${user.email}")
     );
   }
 }

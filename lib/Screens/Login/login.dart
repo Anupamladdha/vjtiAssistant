@@ -34,6 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
     }
     try {
       FirebaseUser user = (await _auth.signInWithEmailAndPassword(email: email, password: password)) as FirebaseUser;
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
     } catch (e) {
       print(e);
     }
@@ -134,6 +135,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: () => {
                             if(_email.text == '' || _pass.text == ''){
                               print("Please enter valid email and password.")
+                            }else{
+                              login(_email.text, _pass.text)
                             }
                           },
                         ),
