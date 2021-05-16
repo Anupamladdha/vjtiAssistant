@@ -12,8 +12,12 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.0
+<<<<<<< HEAD
   flutter_svg: ^0.20.0-nullsafety.3
   bottom_navy_bar: ^5.5.0
+=======
+  flutter_svg: ^0.18.0
+>>>>>>> aefefeb07ab381778c497ad80a863f4331d24c99
   google_fonts: ^1.1.2
   firebase_core:
   firebase_messaging:
@@ -21,6 +25,7 @@ dependencies:
   firebase_storage: ^3.1.6
   firebase_database: ^3.1.6
   cloud_firestore: ^0.13.6
+  fluttertoast: ^8.0.6
 
 dev_dependencies:
   flutter_test:
