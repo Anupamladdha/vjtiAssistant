@@ -211,7 +211,11 @@ packages:
       name: fluttertoast
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "8.0.6"
+=======
+    version: "7.1.8"
+>>>>>>> ad0d00eecbb149e10c62fb354749df8bd471bf7a
   google_fonts:
     dependency: "direct main"
     description:
