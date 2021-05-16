@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vjtiAssistant/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
-  const NavigationDrawerWidget({Key key}) : super(key: key);
+  // const NavigationDrawerWidget({Key key}) : super(key: key);
+  FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -95,9 +98,36 @@ class NavigationDrawerWidget extends StatelessWidget {
                 SizedBox(
                   height: 10,
                 ),
-                BuildMenuItem(
-                  text: "Sign Out",
-                  icon: Icons.people,
+                GestureDetector(
+                  onTap: () async {
+                    try {
+                      return Fluttertoast.showToast(
+                          msg: "Signing out.......",
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.blue,
+                          textColor: Colors.white,
+                          fontSize: 16.0
+                      );
+                      await _auth.signOut();
+                      await Navigator.pushNamed(context, '/login/');
+                    } catch (e) {
+                      return Fluttertoast.showToast(
+                          msg: "Could not sign out",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0
+                      );
+                    }
+                  },
+                    child: BuildMenuItem(
+                    text: "Sign Out",
+                    icon: Icons.people,
+                  ),
                 ),
               ],
             ),
@@ -151,6 +181,7 @@ class BuildMenuItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.all(Radius.circular(10)),
+      // ignore: deprecated_member_use
       child: FlatButton(
         padding: EdgeInsets.all(0),
         onPressed: () {},

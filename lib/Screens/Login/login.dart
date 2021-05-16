@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../HomeScreen/HomeScreen.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -23,7 +24,8 @@ class _LoginScreenState extends State<LoginScreen> {
     _auth.onAuthStateChanged.listen((user){
       if(user != null){
         print("User is logged in!");
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        Navigator.pushNamed(context, '/resources/');
       }
     });
   }
@@ -37,6 +39,15 @@ class _LoginScreenState extends State<LoginScreen> {
       FirebaseUser user = (await _auth.signInWithEmailAndPassword(email: email, password: password)).user;
       Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
     } catch (e) {
+      return Fluttertoast.showToast(
+        msg: "An error occurred...",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
       print(e);
     }
   }
@@ -135,7 +146,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Text('Sign In'),
                           onPressed: () => {
                             if(_email.text == '' || _pass.text == ''){
-                              print("Please enter valid email and password.")
+                              // print("Please enter valid email and password.")
+                              Fluttertoast.showToast(
+                                  msg: "Please enter valid email and password",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0
+                              )
                             }else{
                               login(_email.text, _pass.text)
                             }
