@@ -1,11 +1,70 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({Key key}) : super(key: key);
+  // const SignUpScreen({Key key}) : super(key: key);
+  final databaseReference = Firestore.instance;
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  void createUserRecord(String userName, String uid, String email) async {
+    try {
+      await databaseReference.collection("Users")
+        .document(uid)
+        .setData({
+          'UserName': userName,
+          'Email': email,
+          'uid': uid
+        });  
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: e.toString(),
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
+    }
+  }
+
+  TextEditingController _email = new TextEditingController();
+  TextEditingController _username = new TextEditingController();
+  TextEditingController _pass = new TextEditingController();
+  TextEditingController _cpass = new TextEditingController();
+
+  void signup(String username, String pass, String email) async {
+    try {
+      FirebaseUser user = (await _auth.createUserWithEmailAndPassword(email: email, password: pass)).user;
+      String uid = user.uid;
+      Fluttertoast.showToast(
+        msg: "Signing you up!",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.green[800],
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
+    createUserRecord(username, uid, user.email);
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Error :(",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Color(0xffF7F7F7),
         body: SafeArea(
@@ -42,6 +101,7 @@ class SignUpScreen extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.only(bottom: 20.0),
                         child: TextFormField(
+                          controller: _username,
                           decoration: InputDecoration(
                             prefixIcon: Icon(Icons.people),
                             labelText: 'Username',
@@ -58,6 +118,7 @@ class SignUpScreen extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.only(bottom: 20.0),
                         child: TextFormField(
+                          controller: _email,
                           decoration: InputDecoration(
                             prefixIcon: Icon(Icons.email),
                             labelText: 'Email',
@@ -74,6 +135,7 @@ class SignUpScreen extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.only(bottom: 30.0),
                         child: TextFormField(
+                          controller: _pass,
                           obscureText: true,
                           decoration: InputDecoration(
                             prefixIcon: Icon(Icons.lock),
@@ -91,6 +153,7 @@ class SignUpScreen extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.only(bottom: 30.0),
                         child: TextFormField(
+                          controller: _cpass,
                           obscureText: true,
                           decoration: InputDecoration(
                             prefixIcon: Icon(Icons.lock),
@@ -117,8 +180,23 @@ class SignUpScreen extends StatelessWidget {
                               borderRadius: new BorderRadius.circular(50.0),
                             ),
                           ),
-                          child: Text('Sign In'),
-                          onPressed: () => print('hi'),
+                          child: Text('Sign Up'),
+                          onPressed: (){
+                            if(_pass.text != _cpass.text){
+                              Fluttertoast.showToast(
+                                  msg: "Please retype the confirm password",
+                                  toastLength: Toast.LENGTH_LONG,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0
+                              );
+                            } else{
+                              signup(_username.text, _pass.text, _email.text);
+                              print("Success!!");
+                            }
+                          },
                         ),
                       ),
                       Container(
@@ -132,33 +210,11 @@ class SignUpScreen extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                                 borderRadius: new BorderRadius.circular(50.0)),
                           ),
-                          child: Text('Sign in with google'),
+                          child: Text('Sign up with google'),
                           onPressed: () => print('hi'),
                         ),
                       ),
-                      Container(
-                        width: 283,
-                        child: Row(
-                          children: [
-                            Text(
-                              'Dont have an account? ',
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                color: Color(0xff676767),
-                                fontFamily: 'Roboto',
-                              ),
-                            ),
-                            Text(
-                              'Sign Up',
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                color: Color(0xffE61F1F),
-                                fontFamily: 'Roboto',
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      
                     ],
                   ),
                 ),

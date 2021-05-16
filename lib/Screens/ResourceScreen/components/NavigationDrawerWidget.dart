@@ -99,29 +99,11 @@ class NavigationDrawerWidget extends StatelessWidget {
                   height: 10,
                 ),
                 GestureDetector(
-                  onTap: () async {
+                  onTap: () {
+                    print("Pressed!");
                     try {
-                      return Fluttertoast.showToast(
-                          msg: "Signing out.......",
-                          toastLength: Toast.LENGTH_LONG,
-                          gravity: ToastGravity.BOTTOM,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: Colors.blue,
-                          textColor: Colors.white,
-                          fontSize: 16.0
-                      );
-                      await _auth.signOut();
-                      await Navigator.pushNamed(context, '/login/');
+                      
                     } catch (e) {
-                      return Fluttertoast.showToast(
-                          msg: "Could not sign out",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                          fontSize: 16.0
-                      );
                     }
                   },
                     child: BuildMenuItem(

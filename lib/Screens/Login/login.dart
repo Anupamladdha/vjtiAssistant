@@ -179,27 +179,32 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                         ),
                       ),
-                      Container(
-                        width: 283,
-                        child: Row(
-                          children: [
-                            Text(
-                              'Dont have an account? ',
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                color: Color(0xff676767),
-                                fontFamily: 'Roboto',
+                      GestureDetector(
+                        onTap: () => {
+                          Navigator.pushNamed(context, "/signup")
+                        },
+                          child: Container(
+                          width: 283,
+                          child: Row(
+                            children: [
+                              Text(
+                                'Dont have an account? ',
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                  color: Color(0xff676767),
+                                  fontFamily: 'Roboto',
+                                ),
                               ),
-                            ),
-                            Text(
-                              'Sign Up',
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                color: Color(0xffE61F1F),
-                                fontFamily: 'Roboto',
+                              Text(
+                                'Sign Up',
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                  color: Color(0xffE61F1F),
+                                  fontFamily: 'Roboto',
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ],
