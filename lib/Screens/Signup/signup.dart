@@ -42,6 +42,10 @@ class SignUpScreen extends StatelessWidget {
   TextEditingController _username = new TextEditingController();
   TextEditingController _pass = new TextEditingController();
   TextEditingController _cpass = new TextEditingController();
+  TextEditingController _rollno = new TextEditingController();
+  TextEditingController _branch = new TextEditingController();
+  TextEditingController _sem = new TextEditingController();
+
 
   void signup(String username, String pass, String email) async {
     try {
