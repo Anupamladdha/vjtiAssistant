@@ -3,14 +3,61 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:vjtiAssistant/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class NavigationDrawerWidget extends StatelessWidget {
-  // const NavigationDrawerWidget({Key key}) : super(key: key);
+class NavigationDrawerWidget extends StatefulWidget {
+  @override
+  _NavigationDrawerWidgetState createState() => _NavigationDrawerWidgetState();
+}
+
+class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
   FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseUser user;
+  String uid;
+  String userName;
+  DocumentSnapshot doc;
+  final databaseReference = Firestore.instance;
+  
+    getUser() async {
+    FirebaseUser fuser = await _auth.currentUser();
+    await fuser?.reload();
+    fuser = await _auth.currentUser();
+    print(fuser.email);
+    if(fuser != null){
+      setState(() {
+        this.user = fuser;
+        this.uid = fuser.uid;
+      });
+    }
+  }
+
+   getUserData() async{
+    await this.getUser();
+    print(this.uid);
+    await databaseReference.collection("Users")
+    .document(this.uid)
+    .get()
+    .then((document){
+      // print(document);
+      this.setState(() {
+        this.doc = document;
+      });
+    });
+    print("Hello!");
+    print(this.doc.data["UserName"]);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // this.getUser();
+    this.getUserData();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
+    return Container(
+      child: Drawer(
       child: Material(
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: 20),
@@ -49,21 +96,25 @@ class NavigationDrawerWidget extends StatelessWidget {
                         SizedBox(
                           height: 15,
                         ),
-                        Text(
-                          "Ankit Jaiswal",
+                        this.doc != null? Text(
+                          this.doc.data["UserName"],
                           style: GoogleFonts.roboto(
                             fontSize: 25,
                             color: Color(0xFF707070),
                             fontWeight: FontWeight.bold,
                           ),
+                        ): Text(
+                          "Your Username"
                         ),
-                        Text(
-                          "abjaiswal_b19@ce.vjti.ac.in",
+                        user != null? Text(
+                          user.email,
                           style: GoogleFonts.roboto(
                             fontSize: 15,
                             color: Color(0xFF707070),
                             fontWeight: FontWeight.w600,
                           ),
+                        ): Text(
+                          "Your Email"
                         ),
                       ],
                     ),
@@ -143,9 +194,153 @@ class NavigationDrawerWidget extends StatelessWidget {
           ],
         ),
       ),
+    )
     );
   }
 }
+
+// class NavigationDrawerWidget extends StatelessWidget {
+//   // const NavigationDrawerWidget({Key key}) : super(key: key);
+//   FirebaseAuth _auth = FirebaseAuth.instance;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Drawer(
+//       child: Material(
+//         child: ListView(
+//           padding: EdgeInsets.symmetric(horizontal: 20),
+//           children: <Widget>[
+//             Column(
+//               children: <Widget>[
+//                 Padding(
+//                   padding: EdgeInsets.only(top: 20),
+//                   child: Container(
+//                     alignment: Alignment.centerLeft,
+//                     child: Column(
+//                       crossAxisAlignment: CrossAxisAlignment.start,
+//                       children: <Widget>[
+//                         SizedBox(
+//                           height: 10,
+//                         ),
+//                         GestureDetector(
+//                           onTap: () {
+//                             // Navigate to the second screen using a named route.
+//                             Navigator.pushNamed(context, '/profile');
+//                           },
+//                           child: Container(
+//                             width: 75,
+//                             height: 75,
+//                             decoration: BoxDecoration(
+//                               shape: BoxShape.circle,
+//                               image: DecorationImage(
+//                                 image: NetworkImage(
+//                                   "https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg",
+//                                 ),
+//                                 fit: BoxFit.cover,
+//                               ),
+//                             ),
+//                           ),
+//                         ),
+//                         SizedBox(
+//                           height: 15,
+//                         ),
+//                         Text(
+//                           "Ankit Jaiswal",
+//                           style: GoogleFonts.roboto(
+//                             fontSize: 25,
+//                             color: Color(0xFF707070),
+//                             fontWeight: FontWeight.bold,
+//                           ),
+//                         ),
+//                         Text(
+//                           "abjaiswal_b19@ce.vjti.ac.in",
+//                           style: GoogleFonts.roboto(
+//                             fontSize: 15,
+//                             color: Color(0xFF707070),
+//                             fontWeight: FontWeight.w600,
+//                           ),
+//                         ),
+//                       ],
+//                     ),
+//                   ),
+//                 ),
+//                 SizedBox(height: 10),
+//                 Divider(
+//                   color: BlackColor,
+//                 ),
+//                 const SizedBox(
+//                   height: 10,
+//                 ),
+//                 BuildMenuItem(
+//                   text: "Resources",
+//                   icon: Icons.my_library_books_sharp,
+//                 ),
+//                 SizedBox(
+//                   height: 10,
+//                 ),
+//                 BuildMenuItem(
+//                   text: "Discussions",
+//                   icon: Icons.people,
+//                 ),
+//                 SizedBox(
+//                   height: 10,
+//                 ),
+//                 BuildMenuItem(
+//                   text: "Quiz",
+//                   icon: Icons.people,
+//                   active: true,
+//                 ),
+//                 SizedBox(
+//                   height: 10,
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     print("Pressed!");
+//                     try {
+                      
+//                     } catch (e) {
+//                     }
+//                   },
+//                     child: BuildMenuItem(
+//                     text: "Sign Out",
+//                     icon: Icons.people,
+//                   ),
+//                 ),
+//               ],
+//             ),
+//             Column(
+//               children: <Widget>[
+//                 const SizedBox(
+//                   height: 15,
+//                 ),
+//                 Divider(
+//                   color: BlackColor,
+//                 ),
+//                 const SizedBox(
+//                   height: 7,
+//                 ),
+//                 BuildMenuItem(
+//                   text: "Share this app",
+//                   icon: Icons.share,
+//                 ),
+//                 SizedBox(
+//                   height: 10,
+//                 ),
+//                 BuildMenuItem(
+//                   text: "Help and Feedback",
+//                   icon: Icons.help_outline,
+//                 ),
+//                 SizedBox(
+//                   height: 10,
+//                 ),
+//               ],
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 class BuildMenuItem extends StatelessWidget {
   const BuildMenuItem({

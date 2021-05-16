@@ -3,26 +3,27 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+// ignore: must_be_immutable
 class SignUpScreen extends StatelessWidget {
   // const SignUpScreen({Key key}) : super(key: key);
   final databaseReference = Firestore.instance;
   FirebaseAuth _auth = FirebaseAuth.instance;
   void createUserRecord(String userName, String uid, String email) async {
     try {
-      // await databaseReference.collection("Users")
-      //   .document(uid)
-      //   .setData({
-      //     'UserName': userName,
-      //     'Email': email,
-      //     'uid': uid
-      //   });  
-      DocumentReference ref = await databaseReference.collection("Users")
-      .add({
-        'UserName': userName,
-        'Email': email,
-        'uid': uid
-      });
-  print(ref.documentID);
+      await databaseReference.collection("Users")
+        .document(uid)
+        .setData({
+          'UserName': userName,
+          'Email': email,
+          'uid': uid
+        });  
+      // DocumentReference ref = await databaseReference.collection("Users")
+      // .add({
+      //   'UserName': userName,
+      //   'Email': email,
+      //   'uid': uid
+      // });
+  // print(ref.documentID);
     } catch (e) {
       print(e.toString());
       Fluttertoast.showToast(
