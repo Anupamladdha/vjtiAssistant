@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.white,
         scaffoldBackgroundColor: Colors.white,
       ),
-      initialRoute: '/resources/',
+      initialRoute: '/',
       routes: {
         '/': (context) => OnBoardingScreen(),
         '/login': (context) => LoginScreen(),
