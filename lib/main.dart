@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'Screens/OnBoarding/OnBoardingScreen.dart';
 import 'Screens/Login/login.dart';
 import 'Screens/Signup/signup.dart';
+import 'Screens/Profile/profile.dart';
 import 'package:vjtiAssistant/Screens/ResourceScreen/ResourceScreen.dart';
-
 
 void main() {
   runApp(MyApp());
@@ -24,12 +24,13 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.white,
         scaffoldBackgroundColor: Colors.white,
       ),
-      initialRoute: '/resources/', 
+      initialRoute: '/resources/',
       routes: {
         '/': (context) => OnBoardingScreen(),
         '/login': (context) => LoginScreen(),
         '/signup': (context) => SignUpScreen(),
         '/resources/': (context) => ResourceScreen(),
+        '/profile': (context) => Profile(),
       },
     );
   }
