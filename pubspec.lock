@@ -14,18 +14,7 @@ packages:
       name: boolean_selector
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "2.1.0"
-  bottom_navy_bar:
-    dependency: "direct main"
-    description:
-      name: bottom_navy_bar
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "5.6.0"
-=======
     version: "2.1.0-nullsafety.1"
->>>>>>> aefefeb07ab381778c497ad80a863f4331d24c99
   characters:
     dependency: transitive
     description:
