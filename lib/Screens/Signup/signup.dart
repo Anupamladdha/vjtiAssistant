@@ -113,7 +113,7 @@ class SignUpScreen extends StatelessWidget {
                           controller: _username,
                           decoration: InputDecoration(
                             prefixIcon: Icon(Icons.people),
-                            labelText: 'Username',
+                            labelText: 'Full Name',
                             filled: true,
                             fillColor: Colors.white,
                             contentPadding: EdgeInsets.all(20.0),

@@ -1,23 +1,85 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
+// ignore: must_be_immutable
 class Profile extends StatelessWidget {
+  FirebaseUser user;
+  DocumentSnapshot doc;
+  Profile(FirebaseUser user, DocumentSnapshot doc) {
+    this.user = user;
+    this.doc = doc;
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Profile",
-      home: EditProfilePage(),
+      home: EditProfilePage(user, doc),
     );
   }
 }
 
 class EditProfilePage extends StatefulWidget {
+  FirebaseUser user;
+  DocumentSnapshot doc;
+
+  EditProfilePage(FirebaseUser user, DocumentSnapshot doc){
+    this.user = user;
+    this.doc = doc;
+  }
+
   @override
-  _EditProfilePageState createState() => _EditProfilePageState();
+  _EditProfilePageState createState() => _EditProfilePageState(user, doc);
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  Firestore databaseReference = Firestore.instance;
   bool showPassword = false;
+  bool _isLoading = true;
+  final FirebaseUser user;
+  DocumentSnapshot doc;
+
+  _EditProfilePageState(this.user, this.doc);
+
+
+  //     getUser() async {
+  //   FirebaseUser fuser = await _auth.currentUser();
+  //   await fuser?.reload();
+  //   fuser = await _auth.currentUser();
+  //   print(fuser.email);
+  //   if(fuser != null){
+  //     setState(() {
+  //       this.user = fuser;
+  //       this.uid = fuser.uid;
+  //     });
+  //   }
+  // }
+
+    getUserData() async{
+    print("----------------------");
+    // await this.getUser();
+    print(this.user.uid);
+    await databaseReference.collection("Users")
+    .document(this.user.uid)
+    .get()
+    .then((document){
+      // print(document);
+      this.setState(() {
+        this.doc = document;
+      });
+    });
+    print("Hello!");
+    print(this.doc.data["UserName"]);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    this.getUserData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,18 +174,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
               SizedBox(
                 height: 35,
               ),
-              buildTextField("Full Name", "Anupam Laddha", false),
-              buildTextField("E-mail", "aaladdha_b19@ce.vjti.ac.in", false),
+              buildTextField("Full Name", this.doc.data["UserName"], false),
+              buildTextField("E-mail", this.user.email, false),
               buildTextField("Roll Number", "191070040", false),
               buildTextField("Branch", "Computer Engineering", false),
               buildTextField("SEMESTER", "4", false),
-              buildTextField("Password", "********", true),
+              // buildTextField("Password", "********", true),
               SizedBox(
                 height: 35,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  // ignore: deprecated_member_use
                   OutlineButton(
                     padding: EdgeInsets.symmetric(horizontal: 50),
                     shape: RoundedRectangleBorder(
@@ -139,6 +202,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ),
                     ),
                   ),
+                  // ignore: deprecated_member_use
                   RaisedButton(
                     onPressed: () {},
                     color: Colors.purple,

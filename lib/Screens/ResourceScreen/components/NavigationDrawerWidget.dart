@@ -4,6 +4,7 @@ import 'package:vjtiAssistant/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../Profile/profile.dart';
 
 class NavigationDrawerWidget extends StatefulWidget {
   @override
@@ -77,7 +78,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                         GestureDetector(
                           onTap: () {
                             // Navigate to the second screen using a named route.
-                            Navigator.pushNamed(context, '/profile');
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile(this.user, this.doc)));
                           },
                           child: Container(
                             width: 75,
