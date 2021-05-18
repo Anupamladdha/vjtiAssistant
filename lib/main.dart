@@ -8,7 +8,7 @@ import 'Screens/Login/login.dart';
 import 'Screens/Signup/signup.dart';
 import 'Screens/Profile/profile.dart';
 import 'package:vjtiAssistant/Screens/ResourceScreen/ResourceScreen.dart';
-
+import './Screens/Discussions/Discussions.dart';
 void main() {
   runApp(MyApp());
 }
@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginScreen(),
         '/signup': (context) => SignUpScreen(),
         '/resources/': (context) => ResourceScreen(),
+        '/discussions/': (context) => DiscussionsScreen(),
         // '/profile': (context) => Profile(),
         '/selectedBookScreen': (context) => SelectedBookScreen(),
       },

@@ -135,9 +135,14 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                 SizedBox(
                   height: 10,
                 ),
-                BuildMenuItem(
-                  text: "Discussions",
-                  icon: Icons.people,
+                GestureDetector(
+                  onTap: () {
+
+                  },
+                    child: BuildMenuItem(
+                    text: "Discussions",
+                    icon: Icons.people,
+                  ),
                 ),
                 SizedBox(
                   height: 10,
