@@ -99,8 +99,8 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                         ),
                         this.doc != null? Text(
                           this.doc.data["UserName"],
-                          style: GoogleFonts.roboto(
-                            fontSize: 25,
+                          style: GoogleFonts.lato(
+                            fontSize: 23,
                             color: Color(0xFF707070),
                             fontWeight: FontWeight.bold,
                           ),
@@ -109,7 +109,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                         ),
                         user != null? Text(
                           user.email,
-                          style: GoogleFonts.roboto(
+                          style: GoogleFonts.lato(
                             fontSize: 15,
                             color: Color(0xFF707070),
                             fontWeight: FontWeight.w600,
@@ -247,7 +247,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
 //                         ),
 //                         Text(
 //                           "Ankit Jaiswal",
-//                           style: GoogleFonts.roboto(
+//                           style: GoogleFonts.lato(
 //                             fontSize: 25,
 //                             color: Color(0xFF707070),
 //                             fontWeight: FontWeight.bold,
@@ -255,7 +255,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
 //                         ),
 //                         Text(
 //                           "abjaiswal_b19@ce.vjti.ac.in",
-//                           style: GoogleFonts.roboto(
+//                           style: GoogleFonts.lato(
 //                             fontSize: 15,
 //                             color: Color(0xFF707070),
 //                             fontWeight: FontWeight.w600,
@@ -383,7 +383,7 @@ class BuildMenuItem extends StatelessWidget {
                 ),
                 Text(
                   text,
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                     color: this.active ? Color(0xFF0070FF) : Color(0xFF707070),

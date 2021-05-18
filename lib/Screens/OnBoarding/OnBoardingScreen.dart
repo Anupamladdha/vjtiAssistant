@@ -163,7 +163,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   child: FlatButton(
                     height: 45,
                     onPressed: () {
-                      if (currentIndex <= 2) {
+                      if (currentIndex < 2) {
                         _controller.nextPage(
                           duration: Duration(milliseconds: 100),
                           curve: Curves.bounceIn,
