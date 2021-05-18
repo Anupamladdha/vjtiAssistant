@@ -1,5 +1,6 @@
 // Packages
 import 'package:flutter/material.dart';
+import 'package:vjtiAssistant/Screens/ResourceScreen/SelectedBookScreen.dart';
 
 // Screens
 import 'Screens/OnBoarding/OnBoardingScreen.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         '/signup': (context) => SignUpScreen(),
         '/resources/': (context) => ResourceScreen(),
         // '/profile': (context) => Profile(),
+        '/selectedBookScreen': (context) => SelectedBookScreen(),
       },
     );
   }
