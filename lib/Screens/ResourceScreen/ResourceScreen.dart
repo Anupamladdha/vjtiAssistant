@@ -195,10 +195,96 @@ class _ResourceScreenState extends State<ResourceScreen> {
           ),
         ),
       ),
-      Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        child: Container(
-          // TODO: Add a book UI 
+      Container(
+        // TODO: Add a book UI
+        padding: EdgeInsets.only(left: 16, top: 25, right: 16),
+        child: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).unfocus();
+          },
+          child: ListView(
+            children: [
+              Text(
+                "Add a Book",
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: 'Roboto',
+                ),
+              ),
+              SizedBox(
+                height: 35,
+              ),
+              buildTextField(" Book Name", "Engineering Mechanics", false),
+              buildTextField(" Book Author", "MD Dayal", false),
+              buildTextField(" Semester", "4", false),
+              buildTextField(" Branch", "Computer Engineering", false),
+              buildTextField(" Subject", "Engineering Mechanics", false),
+              RaisedButton(
+                onPressed: () {},
+                color: Colors.orange,
+                padding: EdgeInsets.symmetric(horizontal: 50),
+                elevation: 2,
+                // shape: RoundedRectangleBorder(
+                //     borderRadius: BorderRadius.circular(20)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.drive_folder_upload),
+                    Text(
+                      " UPLOAD A PDF",
+                      style: TextStyle(
+                        fontSize: 14,
+                        letterSpacing: 2.2,
+                        color: Colors.white,
+                        fontFamily: 'Roboto',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 35,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  OutlineButton(
+                    padding: EdgeInsets.symmetric(horizontal: 50),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    onPressed: () {},
+                    child: Text(
+                      "CANCEL",
+                      style: TextStyle(
+                        fontSize: 14,
+                        letterSpacing: 2.2,
+                        color: Colors.black,
+                        fontFamily: 'Roboto',
+                      ),
+                    ),
+                  ),
+                  RaisedButton(
+                    onPressed: () {},
+                    color: Colors.blue,
+                    padding: EdgeInsets.symmetric(horizontal: 50),
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Text(
+                      "ADD BOOK",
+                      style: TextStyle(
+                        fontSize: 14,
+                        letterSpacing: 2.2,
+                        color: Colors.white,
+                        fontFamily: 'Roboto',
+                      ),
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
       Padding(
@@ -319,6 +405,35 @@ class _ResourceScreenState extends State<ResourceScreen> {
             inactiveColor: Color(0xFF707070),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget buildTextField(
+      String labelText, String placeholder, bool isPasswordTextField) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 35.0),
+      child: TextField(
+        // obscureText: isPasswordTextField ? showPassword : false,
+
+        decoration: InputDecoration(
+          focusedBorder: const OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.blue),
+          ),
+          contentPadding: EdgeInsets.all(10),
+          labelText: labelText,
+          labelStyle: TextStyle(
+            color: Colors.black54,
+          ),
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          hintText: placeholder,
+          hintStyle: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+            fontFamily: 'Roboto',
+          ),
+        ),
       ),
     );
   }
