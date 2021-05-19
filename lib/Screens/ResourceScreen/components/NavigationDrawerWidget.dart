@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../Profile/profile.dart';
+import '../../Discussions/Discussions.dart';
 
 class NavigationDrawerWidget extends StatefulWidget {
   @override
@@ -131,17 +132,23 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                 BuildMenuItem(
                   text: "Resources",
                   icon: Icons.my_library_books_sharp,
+                  onpressed: ()=>{
+                    Navigator.pushNamed(context, '/resources/')
+                  },
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 GestureDetector(
                   onTap: () {
-
+                    // Navigator.pushNamed(context, '/discussions/');
                   },
                     child: BuildMenuItem(
                     text: "Discussions",
                     icon: Icons.people,
+                    onpressed: ()=>{
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>DiscussionsScreen()))
+                    },
                   ),
                 ),
                 SizedBox(
@@ -156,16 +163,22 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                   height: 10,
                 ),
                 GestureDetector(
-                  onTap: () {
-                    print("Pressed!");
-                    try {
-                      
-                    } catch (e) {
-                    }
-                  },
                     child: BuildMenuItem(
                     text: "Sign Out",
                     icon: Icons.people,
+                    onpressed: (){
+                      try {
+                        FirebaseAuth.instance.signOut();
+                        print("Signed out!");                        
+                      } catch (e) {
+                        Fluttertoast.showToast(
+                          msg: e.toString(),
+                          backgroundColor: Colors.red,
+                          gravity: ToastGravity.BOTTOM,
+                          toastLength: Toast.LENGTH_LONG
+                        );
+                      }
+                    },
                   ),
                 ),
               ],
@@ -353,12 +366,15 @@ class BuildMenuItem extends StatelessWidget {
     Key key,
     @required this.text,
     @required this.icon,
-    this.active = false,
+    this.active = false, 
+    this.onpressed,
   }) : super(key: key);
 
   final String text;
   final IconData icon;
   final bool active;
+  // ignore: unused_field
+  final Function onpressed;
 
   @override
   Widget build(BuildContext context) {
@@ -367,7 +383,7 @@ class BuildMenuItem extends StatelessWidget {
       // ignore: deprecated_member_use
       child: FlatButton(
         padding: EdgeInsets.all(0),
-        onPressed: () {},
+        onPressed: () => {onpressed()},
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(10)),
