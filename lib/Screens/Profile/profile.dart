@@ -82,6 +82,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController nameController = new TextEditingController();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -174,11 +175,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
               SizedBox(
                 height: 35,
               ),
-              buildTextField("Full Name", this.doc.data["UserName"], false),
-              buildTextField("E-mail", this.user.email, false),
-              buildTextField("Roll Number", "191070040", false),
-              buildTextField("Branch", "Computer Engineering", false),
-              buildTextField("SEMESTER", "4", false),
+              buildTextField("Full Name", this.doc.data["UserName"], false, nameController),
+              buildTextField("E-mail", this.user.email, false, null),
+              buildTextField("Roll Number", "191070040", false, null),
+              buildTextField("Branch", "Computer Engineering", false, null),
+              buildTextField("SEMESTER", "4", false, null),
               // buildTextField("Password", "********", true),
               SizedBox(
                 height: 35,
@@ -230,7 +231,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   }
 
   Widget buildTextField(
-      String labelText, String placeholder, bool isPasswordTextField) {
+    String labelText, String placeholder, bool isPasswordTextField, TextEditingController _controller) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 35.0),
       child: TextField(
@@ -239,9 +240,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
           suffixIcon: isPasswordTextField
               ? IconButton(
                   onPressed: () {
-                    setState(() {
-                      showPassword = !showPassword;
-                    });
+                    // setState(() {
+                    //   showPassword = !showPassword;
+                    // });
+
                   },
                   icon: Icon(
                     Icons.remove_red_eye,

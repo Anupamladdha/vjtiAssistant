@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../Profile/profile.dart';
 import '../../Discussions/Discussions.dart';
+import '../../Login/login.dart';
 
 class NavigationDrawerWidget extends StatefulWidget {
   @override
@@ -169,7 +170,8 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                     onpressed: (){
                       try {
                         FirebaseAuth.instance.signOut();
-                        Navigator.pushNamed(context, '/login/');
+                        // Navigator.pushNamed(context, '/login/');
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
                         print("Signed out!");                        
                       } catch (e) {
                         Fluttertoast.showToast(
