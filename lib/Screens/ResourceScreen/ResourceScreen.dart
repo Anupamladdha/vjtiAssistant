@@ -163,7 +163,6 @@ class Body extends StatelessWidget {
                         image: DecorationImage(
                           image: AssetImage('assets/images/book2.jpg'),
                           fit: BoxFit.fitHeight,
-                          // fit: BoxFit,
                         ),
                       ),
                     );
@@ -237,55 +236,55 @@ class Body extends StatelessWidget {
                                 SizedBox(
                                   height: 5,
                                 ),
-                                Row(
-                                  children: <Widget>[
-                                    SizedBox(
-                                      child: Text(
-                                        "5.0",
-                                        style: GoogleFonts.lato(
-                                          color: Color(0xFF707070),
-                                          fontSize: 13,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(width: 5,),
-                                    SizedBox(
-                                      child: Icon(
-                                        Icons.star_outlined,
-                                        color: Colors.yellow,
-                                        size: 17,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      child: Icon(
-                                        Icons.star_outlined,
-                                        color: Colors.yellow,
-                                        size: 17,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      child: Icon(
-                                        Icons.star_outlined,
-                                        color: Colors.yellow,
-                                        size: 17,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      child: Icon(
-                                        Icons.star_outlined,
-                                        color: Colors.yellow,
-                                        size: 17,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      child: Icon(
-                                        Icons.star_outlined,
-                                        color: Colors.yellow,
-                                        size: 17,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                // Row(
+                                //   children: <Widget>[
+                                //     SizedBox(
+                                //       child: Text(
+                                //         "5.0",
+                                //         style: GoogleFonts.lato(
+                                //           color: Color(0xFF707070),
+                                //           fontSize: 13,
+                                //         ),
+                                //       ),
+                                //     ),
+                                //     SizedBox(width: 5,),
+                                //     SizedBox(
+                                //       child: Icon(
+                                //         Icons.star_outlined,
+                                //         color: Colors.yellow,
+                                //         size: 17,
+                                //       ),
+                                //     ),
+                                //     SizedBox(
+                                //       child: Icon(
+                                //         Icons.star_outlined,
+                                //         color: Colors.yellow,
+                                //         size: 17,
+                                //       ),
+                                //     ),
+                                //     SizedBox(
+                                //       child: Icon(
+                                //         Icons.star_outlined,
+                                //         color: Colors.yellow,
+                                //         size: 17,
+                                //       ),
+                                //     ),
+                                //     SizedBox(
+                                //       child: Icon(
+                                //         Icons.star_outlined,
+                                //         color: Colors.yellow,
+                                //         size: 17,
+                                //       ),
+                                //     ),
+                                //     SizedBox(
+                                //       child: Icon(
+                                //         Icons.star_outlined,
+                                //         color: Colors.yellow,
+                                //         size: 17,
+                                //       ),
+                                //     ),
+                                //   ],
+                                // ),
                               ],
                             ),
                           ],
