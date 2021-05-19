@@ -169,6 +169,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                     onpressed: (){
                       try {
                         FirebaseAuth.instance.signOut();
+                        Navigator.pushNamed(context, '/login/');
                         print("Signed out!");                        
                       } catch (e) {
                         Fluttertoast.showToast(
