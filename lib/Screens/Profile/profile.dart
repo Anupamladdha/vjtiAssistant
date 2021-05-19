@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../ResourceScreen/ResourceScreen.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 // ignore: must_be_immutable
 class Profile extends StatelessWidget {
@@ -20,6 +22,7 @@ class Profile extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class EditProfilePage extends StatefulWidget {
   FirebaseUser user;
   DocumentSnapshot doc;
@@ -73,6 +76,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
     print("Hello!");
     print(this.doc.data["UserName"]);
   }
+
+
 
   @override
   void initState() {
@@ -192,7 +197,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     padding: EdgeInsets.symmetric(horizontal: 50),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ResourceScreen()));
+                    },
                     child: Text(
                       "CANCEL",
                       style: TextStyle(
@@ -205,7 +212,24 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   ),
                   // ignore: deprecated_member_use
                   RaisedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      try {
+                        await this.databaseReference.collection('Users')
+                        .document(this.user.uid)
+                        .updateData(
+                          {
+                          "UserName": nameController.text
+                          }
+                        );
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ResourceScreen()));
+                      } catch (e) {
+                        Fluttertoast.showToast(msg: e.toString(),
+                          gravity: ToastGravity.BOTTOM,
+                          backgroundColor: Colors.red[100],
+                        );
+                      }
+                      
+                    },
                     color: Colors.purple,
                     padding: EdgeInsets.symmetric(horizontal: 50),
                     elevation: 2,
@@ -235,6 +259,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 35.0),
       child: TextField(
+        controller: _controller,
         obscureText: isPasswordTextField ? showPassword : false,
         decoration: InputDecoration(
           suffixIcon: isPasswordTextField

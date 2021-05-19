@@ -3,19 +3,25 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-// ignore: must_be_immutable
-class SignUpScreen extends StatelessWidget {
-  // const SignUpScreen({Key key}) : super(key: key);
+class SignUpScreen extends StatefulWidget {
+  @override
+  _SignUpScreenState createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
   final databaseReference = Firestore.instance;
   FirebaseAuth _auth = FirebaseAuth.instance;
-  void createUserRecord(String userName, String uid, String email) async {
+  void createUserRecord(String userName, String uid, String email, String branch, String rollno, int sem) async {
     try {
       await databaseReference.collection("Users")
         .document(uid)
         .setData({
           'UserName': userName,
           'Email': email,
-          'uid': uid
+          'uid': uid,
+          'Branch': branch,
+          'Rollno': rollno,
+          'Semester': sem
         });  
       // DocumentReference ref = await databaseReference.collection("Users")
       // .add({
@@ -43,11 +49,11 @@ class SignUpScreen extends StatelessWidget {
   TextEditingController _pass = new TextEditingController();
   TextEditingController _cpass = new TextEditingController();
   TextEditingController _rollno = new TextEditingController();
-  TextEditingController _branch = new TextEditingController();
+  // TextEditingController _branch = new TextEditingController();
   TextEditingController _sem = new TextEditingController();
+  String branch;
 
-
-  void signup(String username, String pass, String email) async {
+  void signup(String username, String pass, String email, String branch, String rollno, int sem) async {
     try {
       FirebaseUser user = (await _auth.createUserWithEmailAndPassword(email: email, password: pass)).user;
       String uid = user.uid;
@@ -60,7 +66,7 @@ class SignUpScreen extends StatelessWidget {
         textColor: Colors.white,
         fontSize: 16.0
     );
-    createUserRecord(username, uid, user.email);
+    createUserRecord(username, uid, user.email, branch, rollno, sem);
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Error :(",
@@ -76,7 +82,7 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+      return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Color(0xffF7F7F7),
@@ -182,6 +188,72 @@ class SignUpScreen extends StatelessWidget {
                         ),
                       ),
                       Container(
+                        margin: EdgeInsets.only(bottom: 20.0),
+                        // child: TextFormField(
+                        //   controller: _branch,
+                        //   decoration: InputDecoration(
+                        //     prefixIcon: Icon(Icons.email),
+                        //     labelText: 'Branch',
+                        //     filled: true,
+                        //     fillColor: Colors.white,
+                        //     contentPadding: EdgeInsets.all(20.0),
+                        //     enabledBorder: OutlineInputBorder(
+                        //       borderRadius: BorderRadius.circular(30.0),
+                        //       borderSide: BorderSide(color: Colors.white),
+                        //     ),
+                        //   ),
+                        // ),
+                        child: new DropdownButton<String>(
+                        value: branch,
+                        hint: Text("Please select a branch"),
+                        items: <String>['Computer Engineering', 'Information Technology', 'Mechanical Engineering', 'Civil Engineering', 'Electronic Engineering', 'Electronics and Telecommunication'].map((String value) {
+                          return new DropdownMenuItem<String>(
+                            value: value,
+                            child: new Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (val) {
+                          this.setState(() {
+                            this.branch = val;
+                          });
+                          print(branch);},
+                      ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(bottom: 20.0, top: 20.0),
+                        child: TextFormField(
+                          controller: _rollno,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.email),
+                            labelText: 'Roll Number',
+                            filled: true,
+                            fillColor: Colors.white,
+                            contentPadding: EdgeInsets.all(20.0),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(bottom: 20.0),
+                        child: TextFormField(
+                          controller: _sem,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.email),
+                            labelText: 'Semester',
+                            filled: true,
+                            fillColor: Colors.white,
+                            contentPadding: EdgeInsets.all(20.0),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
                         margin: EdgeInsets.only(bottom: 30.0),
                         width: 332.0,
                         height: 70.0,
@@ -206,7 +278,7 @@ class SignUpScreen extends StatelessWidget {
                                   fontSize: 16.0
                               );
                             } else{
-                              signup(_username.text, _pass.text, _email.text);
+                              signup(_username.text, _pass.text, _email.text, branch, _rollno.text, int.parse(_sem.text));
                               print("Success!!");
                             }
                           },
@@ -239,3 +311,13 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 }
+
+// // ignore: must_be_immutable
+// class SignUpScreen extends StatelessWidget {
+//   // const SignUpScreen({Key key}) : super(key: key);
+  
+//   @override
+//   Widget build(BuildContext context) {
+    
+//   }
+// }
