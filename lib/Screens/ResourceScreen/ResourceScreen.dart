@@ -14,9 +14,262 @@ class ResourceScreen extends StatefulWidget {
 
 class _ResourceScreenState extends State<ResourceScreen> {
   int currentIndex = 0;
+  List listOfTitles = ["Resources", "Add New Book", "My Library"];
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    List listOfSections = [
+      Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        child: Container(
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      // width: 270,
+                      width: size.width * 0.7,
+                      height: 50,
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: 30,
+                          ),
+                          hintText: "Search",
+                          suffixIcon: Padding(
+                            padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                            child: SizedBox(
+                              child: Icon(Icons.search),
+                              height: 18,
+                            ),
+                          ),
+                          // textStyle: GoogleFonts.lato(),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                              color: BlackColor,
+                              width: 1,
+                              style: BorderStyle.solid,
+                            ),
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                              color: BlackColor,
+                              width: 1,
+                              style: BorderStyle.solid,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Spacer(),
+                    SizedBox(
+                      height: 30,
+                      child: SvgPicture.asset(
+                        "assets/icons/filter.svg",
+                        height: 40,
+                        color: Color(0xFF707070),
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  margin: EdgeInsets.only(top: 22),
+                  child: Text(
+                    "Books you may like...",
+                    textAlign: TextAlign.left,
+                    style: GoogleFonts.lato(
+                      fontSize: 14,
+                      color: Color(0xFF262828),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 22),
+                  height: 220,
+                  child: ListView.builder(
+                    itemCount: 10,
+                    physics: BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        height: 170,
+                        width: 140,
+                        margin: EdgeInsets.only(right: 19),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                            image: AssetImage('assets/images/book2.jpg'),
+                            fit: BoxFit.fitHeight,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  margin: EdgeInsets.only(top: 22),
+                  child: Text(
+                    "All Books",
+                    textAlign: TextAlign.left,
+                    style: GoogleFonts.lato(
+                      fontSize: 14,
+                      color: Color(0xFF262828),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                ListView.builder(
+                    padding: EdgeInsets.only(top: 25),
+                    physics: BouncingScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: EdgeInsets.only(bottom: 19),
+                        child: InkWell(
+                          onTap: () {
+                            print("Hii");
+                          },
+                          borderRadius: BorderRadius.circular(5),
+                          child: Container(
+                            height: 81,
+                            width: size.width - 50,
+                            // color: Color(0xFFF7F7F7),
+                            child: Row(
+                              children: <Widget>[
+                                Container(
+                                  height: 81,
+                                  width: 62,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    image: DecorationImage(
+                                      image:
+                                          AssetImage("assets/images/book2.jpg"),
+                                      fit: BoxFit.fitHeight,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 21,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      "Book Name",
+                                      style: GoogleFonts.lato(
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      "Author Name",
+                                      style: GoogleFonts.lato(
+                                        color: Color(0xFF707070),
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
+              ],
+            ),
+          ),
+        ),
+      ),
+      Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        child: Container(
+          // TODO: Add a book UI 
+        ),
+      ),
+      Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: 20,
+        ),
+        child: ListView.builder(
+            padding: EdgeInsets.only(top: 25),
+            physics: BouncingScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return Container(
+                margin: EdgeInsets.only(bottom: 19),
+                child: InkWell(
+                  onTap: () {
+                    print("Hii");
+                  },
+                  borderRadius: BorderRadius.circular(5),
+                  child: Container(
+                    height: 81,
+                    width: size.width - 50,
+                    // color: Color(0xFFF7F7F7),
+                    child: Row(
+                      children: <Widget>[
+                        Container(
+                          height: 81,
+                          width: 62,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            image: DecorationImage(
+                              image: AssetImage("assets/images/book2.jpg"),
+                              fit: BoxFit.fitHeight,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 21,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              "Book Name",
+                              style: GoogleFonts.lato(
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              "Author Name",
+                              style: GoogleFonts.lato(
+                                color: Color(0xFF707070),
+                                fontSize: 13,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            }),
+      ),
+    ];
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -27,7 +280,7 @@ class _ResourceScreenState extends State<ResourceScreen> {
           color: Colors.black,
         ),
         title: Text(
-          "Resources",
+          listOfTitles[currentIndex],
           style: GoogleFonts.lato(
             fontSize: 18,
             fontWeight: FontWeight.bold,
@@ -36,7 +289,7 @@ class _ResourceScreenState extends State<ResourceScreen> {
         ),
       ),
       drawer: NavigationDrawerWidget(),
-      body: Body(),
+      body: listOfSections[currentIndex],
       bottomNavigationBar: BottomNavyBar(
         selectedIndex: currentIndex,
         onItemSelected: (index) {
@@ -50,11 +303,11 @@ class _ResourceScreenState extends State<ResourceScreen> {
             title: Text("Discover"),
             inactiveColor: Color(0xFF707070),
           ),
-          BottomNavyBarItem(
-            icon: Icon(Icons.bookmark),
-            title: Text("Bookmarks"),
-            inactiveColor: Color(0xFF707070),
-          ),
+          // BottomNavyBarItem(
+          //   icon: Icon(Icons.bookmark),
+          //   title: Text("Bookmarks"),
+          //   inactiveColor: Color(0xFF707070),
+          // ),
           BottomNavyBarItem(
             icon: Icon(Icons.add),
             title: Text("Add book"),
@@ -66,235 +319,6 @@ class _ResourceScreenState extends State<ResourceScreen> {
             inactiveColor: Color(0xFF707070),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class Body extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20),
-      child: Container(
-        child: SingleChildScrollView(
-          child: Column(
-            // physics: BouncingScrollPhysics(),
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    // width: 270,
-                    width: size.width * 0.7,
-                    height: 50,
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: 30,
-                        ),
-                        hintText: "Search",
-                        suffixIcon: Padding(
-                          padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
-                          child: SizedBox(
-                            child: Icon(Icons.search),
-                            height: 18,
-                          ),
-                        ),
-                        // textStyle: GoogleFonts.lato(),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                            color: BlackColor,
-                            width: 1,
-                            style: BorderStyle.solid,
-                          ),
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                            color: BlackColor,
-                            width: 1,
-                            style: BorderStyle.solid,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Spacer(),
-                  SizedBox(
-                    height: 30,
-                    child: SvgPicture.asset(
-                      "assets/icons/filter.svg",
-                      height: 40,
-                      color: Color(0xFF707070),
-                    ),
-                  ),
-                ],
-              ),
-              Container(
-                alignment: Alignment.centerLeft,
-                margin: EdgeInsets.only(top: 22),
-                child: Text(
-                  "Books you may like...",
-                  textAlign: TextAlign.left,
-                  style: GoogleFonts.lato(
-                    fontSize: 14,
-                    color: Color(0xFF262828),
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 22),
-                height: 220,
-                child: ListView.builder(
-                  itemCount: 10,
-                  physics: BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      height: 170,
-                      width: 140,
-                      margin: EdgeInsets.only(right: 19),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                          image: AssetImage('assets/images/book2.jpg'),
-                          fit: BoxFit.fitHeight,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              Container(
-                alignment: Alignment.centerLeft,
-                margin: EdgeInsets.only(top: 22),
-                child: Text(
-                  "All Books",
-                  textAlign: TextAlign.left,
-                  style: GoogleFonts.lato(
-                    fontSize: 14,
-                    color: Color(0xFF262828),
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              ListView.builder(
-                  padding: EdgeInsets.only(top: 25),
-                  physics: BouncingScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        print("Hii");
-                      },
-                      borderRadius: BorderRadius.circular(5),
-                      child: Container(
-                        margin: EdgeInsets.only(bottom: 19),
-                        height: 81,
-                        width: size.width - 50,
-                        // color: Color(0xFFF7F7F7),
-                        child: Row(
-                          children: <Widget>[
-                            Container(
-                              height: 81,
-                              width: 62,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                image: DecorationImage(
-                                  image: AssetImage("assets/images/book2.jpg"),
-                                  fit: BoxFit.fitHeight,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 21,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  "Book Name",
-                                  style: GoogleFonts.lato(
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  "Author Name",
-                                  style: GoogleFonts.lato(
-                                    color: Color(0xFF707070),
-                                    fontSize: 13,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                // Row(
-                                //   children: <Widget>[
-                                //     SizedBox(
-                                //       child: Text(
-                                //         "5.0",
-                                //         style: GoogleFonts.lato(
-                                //           color: Color(0xFF707070),
-                                //           fontSize: 13,
-                                //         ),
-                                //       ),
-                                //     ),
-                                //     SizedBox(width: 5,),
-                                //     SizedBox(
-                                //       child: Icon(
-                                //         Icons.star_outlined,
-                                //         color: Colors.yellow,
-                                //         size: 17,
-                                //       ),
-                                //     ),
-                                //     SizedBox(
-                                //       child: Icon(
-                                //         Icons.star_outlined,
-                                //         color: Colors.yellow,
-                                //         size: 17,
-                                //       ),
-                                //     ),
-                                //     SizedBox(
-                                //       child: Icon(
-                                //         Icons.star_outlined,
-                                //         color: Colors.yellow,
-                                //         size: 17,
-                                //       ),
-                                //     ),
-                                //     SizedBox(
-                                //       child: Icon(
-                                //         Icons.star_outlined,
-                                //         color: Colors.yellow,
-                                //         size: 17,
-                                //       ),
-                                //     ),
-                                //     SizedBox(
-                                //       child: Icon(
-                                //         Icons.star_outlined,
-                                //         color: Colors.yellow,
-                                //         size: 17,
-                                //       ),
-                                //     ),
-                                //   ],
-                                // ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }),
-            ],
-          ),
-        ),
       ),
     );
   }
