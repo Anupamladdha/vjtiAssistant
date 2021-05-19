@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../HomeScreen/HomeScreen.dart';
+// import '../HomeScreen/HomeScreen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -37,7 +37,9 @@ class _LoginScreenState extends State<LoginScreen> {
     }
     try {
       FirebaseUser user = (await _auth.signInWithEmailAndPassword(email: email, password: password)).user;
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+      // Navigator.push(context, MaterialPageRoute(builder: (context)=>));
+        Navigator.pushNamed(context, '/resources/');
+
     } catch (e) {
       return Fluttertoast.showToast(
         msg: "An error occurred...",
